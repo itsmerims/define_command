@@ -17,7 +17,9 @@ app.get('/define', async (req, res) => {
       const definition = response.data[0].meanings[0].definitions[0].definition;
       const definitions = response.data[0].meanings[0].definitions[0];
       console.log(definitions);
-      res.json({ message: definition });
+      const definitionWithoutMessage = definition.slice(1, -1); // Efficiently removes quotes
+
+      res.json(definitionWithoutMessage); // Send only the definition string
     } else {
       res.status(404).json({ message: 'No definition found for this word.' }); // Handle no definition
     }
